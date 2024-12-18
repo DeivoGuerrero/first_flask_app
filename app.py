@@ -14,7 +14,10 @@ def home():
 
 @app.route('/post/<int:post_id>') # /post/0
 def post(post_id):
-    return render_template('post.html', post=posts.get(post_id))
+    post = posts.get(post_id)
+    if not post:
+        return render_template('404.jinja2', message=f'A post with if {post_id} was not found.')
+    return render_template('post.jinja2', post=posts.get(post_id))
 
 if __name__ == '__main__':
     app.run(debug=True)
